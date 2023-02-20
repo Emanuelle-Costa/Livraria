@@ -1,4 +1,6 @@
+using Livraria.Application;
 using Livraria.Persistence;
+using Livraria.Persistence.Contexto;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,10 @@ var conexao = builder.Services.AddDbContext<LivrariaContexto>(opc => opc.UseSqlS
     builder.Configuration.GetConnectionString("Conexao")));
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ILivroPersistence, LivroPersistence>();
+builder.Services.AddScoped<ILivroService, LivroService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
