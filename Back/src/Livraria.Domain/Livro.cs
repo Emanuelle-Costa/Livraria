@@ -11,7 +11,7 @@
         public int? Edicao { get; set; }
         public Editora Editora { get; set; }
         public IEnumerable<AutorLivro> AutoresLivro { get; set; }
-        public decimal Preco { get; set; }
+        public double Preco { get; set; }
         public int QntLivroEmEstoque { get; set; }
 
     }
