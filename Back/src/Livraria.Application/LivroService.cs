@@ -24,7 +24,7 @@ namespace Livraria.Application
                 _livroPersistence.Adicionar<Livro>(model);
                 if(await _livroPersistence.SalvarAlteracoes())
                 {
-                    return await _livroPersistence.PegarLivroPeloId(model.Id, false);
+                    return await _livroPersistence.PegarLivroPeloId(model.Id);
                 }
                 return null;
             }
@@ -39,7 +39,7 @@ namespace Livraria.Application
         {
             try
             {
-                var livro = await _livroPersistence.PegarLivroPeloId(livroId, false);
+                var livro = await _livroPersistence.PegarLivroPeloId(livroId);
                 if (livro == null) return null;
 
                 model.Id = livro.Id;
@@ -47,7 +47,7 @@ namespace Livraria.Application
                 _livroPersistence.Atualizar(model);
                 if (await _livroPersistence.SalvarAlteracoes())
                 {
-                    return await _livroPersistence.PegarLivroPeloId(model.Id, false);
+                    return await _livroPersistence.PegarLivroPeloId(model.Id);
                 }
                 return null;
             }
@@ -62,7 +62,7 @@ namespace Livraria.Application
         {
             try
             {
-                var livro = await _livroPersistence.PegarLivroPeloId(livroId, false);
+                var livro = await _livroPersistence.PegarLivroPeloId(livroId);
                 if (livro == null) throw new Exception("Livro não encontrado!");
 
                 _livroPersistence.Deletar<Livro>(livro);
@@ -75,11 +75,11 @@ namespace Livraria.Application
             }
         }
 
-        public async Task<Livro> PegarLivroPeloId(int livroId, bool includeAutor = false)
+        public async Task<Livro> PegarLivroPeloId(int livroId)
         {
             try
            {
-                var livro = await _livroPersistence.PegarLivroPeloId(livroId, includeAutor);
+                var livro = await _livroPersistence.PegarLivroPeloId(livroId);
                 if(livro == null) return null;
 
                 return livro;
@@ -91,11 +91,11 @@ namespace Livraria.Application
            }
         }
 
-        public async Task<Livro[]> PegarTodosLivros(bool includeAutor = false)
+        public async Task<Livro[]> PegarTodosLivros()
         {
             try
            {
-                var livros = await _livroPersistence.PegarTodosLivros(includeAutor);
+                var livros = await _livroPersistence.PegarTodosLivros();
                 if(livros == null) return null;
 
                 return livros;
@@ -107,11 +107,11 @@ namespace Livraria.Application
            }
         }
 
-        public async Task<Livro[]> PegarTodosLivrosPelaEdicao(int edicao, bool includeAutor = false)
+        public async Task<Livro[]> PegarTodosLivrosPelaEdicao(int edicao)
         {
             try
            {
-                var livros = await _livroPersistence.PegarTodosLivrosPelaEdicao(edicao, includeAutor);
+                var livros = await _livroPersistence.PegarTodosLivrosPelaEdicao(edicao);
                 if(livros == null) return null;
 
                 return livros;
@@ -123,11 +123,11 @@ namespace Livraria.Application
            }
         }
 
-        public async Task<Livro[]> PegarTodosLivrosPelaEditora(Editora editora, bool includeAutor = false)
+        public async Task<Livro[]> PegarTodosLivrosPelaEditora(string editora)
         {
             try
            {
-                var livros = await _livroPersistence.PegarTodosLivrosPelaEditora(editora, includeAutor);
+                var livros = await _livroPersistence.PegarTodosLivrosPelaEditora(editora);
                 if(livros == null) return null;
 
                 return livros;
@@ -139,11 +139,11 @@ namespace Livraria.Application
            }
         }
 
-        public async Task<Livro[]> PegarTodosLivrosPeloAutor(AutorLivro autor, bool includeAutor = false)
+        public async Task<Livro[]> PegarTodosLivrosPeloAutor(String autor)
         {
             try
            {
-                var livros = await _livroPersistence.PegarTodosLivrosPeloAutor(autor, includeAutor);
+                var livros = await _livroPersistence.PegarTodosLivrosPeloAutor(autor);
                 if(livros == null) return null;
 
                 return livros;
@@ -155,11 +155,11 @@ namespace Livraria.Application
            }
         }
 
-        public async Task<Livro[]> PegarTodosLivrosPeloTitulo(string titulo, bool includeAutor = false)
+        public async Task<Livro[]> PegarTodosLivrosPeloTitulo(string titulo)
         {
             try
            {
-                var livros = await _livroPersistence.PegarTodosLivrosPeloTitulo(titulo, includeAutor);
+                var livros = await _livroPersistence.PegarTodosLivrosPeloTitulo(titulo);
                 if(livros == null) return null;
 
                 return livros;

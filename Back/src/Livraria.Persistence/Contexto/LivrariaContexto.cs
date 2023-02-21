@@ -10,15 +10,5 @@ namespace Livraria.Persistence.Contexto
         }
         public DbSet<Livro> Livros { get; set; }
 
-        public DbSet<Editora> Editoras { get; set; }
-
-        public DbSet<Autor> Autores { get; set; }
-        public DbSet<AutorLivro> AutoresLivros { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<AutorLivro>()
-                .HasKey(AL => new {AL.AutorId, AL.LivroId});
-        }
     }
 }

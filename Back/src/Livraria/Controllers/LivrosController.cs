@@ -24,7 +24,7 @@ namespace Livraria.Controllers
         {
             try
             {
-                var livros = await _livroService.PegarTodosLivros(true);
+                var livros = await _livroService.PegarTodosLivros();
                 if (livros == null) return NotFound("Nenhum Livro Encontrado.");
 
                 return Ok(livros);
@@ -41,7 +41,7 @@ namespace Livraria.Controllers
         {
             try
             {
-                var livro = await _livroService.PegarLivroPeloId(id, true);
+                var livro = await _livroService.PegarLivroPeloId(id);
                 if (livro == null) return NotFound("Nenhum Livro Encontrado pelo Id.");
 
                 return Ok(livro);
@@ -54,11 +54,11 @@ namespace Livraria.Controllers
         } 
 
         [HttpGet("{titulo}/titulo")]
-        public async Task<IActionResult> PegarTodosLivrosPeloTitulo(string nome)
+        public async Task<IActionResult> PegarTodosLivrosPeloTitulo(string titulo)
         {
             try
             {
-                var livros = await _livroService.PegarTodosLivrosPeloTitulo(nome, true);
+                var livros = await _livroService.PegarTodosLivrosPeloTitulo(titulo);
                 if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Titulo.");
 
                 return Ok(livros);
@@ -71,11 +71,11 @@ namespace Livraria.Controllers
         } 
 
         [HttpGet("{autor}/autor")]
-        public async Task<IActionResult> PegarTodosLivrosPeloAutor(AutorLivro autor)
+        public async Task<IActionResult> PegarTodosLivrosPeloAutor(string autor)
         {
             try
             {
-                var livros = await _livroService.PegarTodosLivrosPeloAutor(autor, true);
+                var livros = await _livroService.PegarTodosLivrosPeloAutor(autor);
                 if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Autor.");
 
                 return Ok(livros);
@@ -88,11 +88,11 @@ namespace Livraria.Controllers
         } 
 
         [HttpGet("{editora}/editora")]
-        public async Task<IActionResult> PegarTodosLivrosPelaEditora(Editora editora)
+        public async Task<IActionResult> PegarTodosLivrosPelaEditora(string editora)
         {
             try
             {
-                var livros = await _livroService.PegarTodosLivrosPelaEditora(editora, true);
+                var livros = await _livroService.PegarTodosLivrosPelaEditora(editora);
                 if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Editora.");
 
                 return Ok(livros);
@@ -109,7 +109,7 @@ namespace Livraria.Controllers
         {
             try
             {
-                var livros = await _livroService.PegarTodosLivrosPelaEdicao(edicao, true);
+                var livros = await _livroService.PegarTodosLivrosPelaEdicao(edicao);
                 if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Edicação.");
 
                 return Ok(livros);

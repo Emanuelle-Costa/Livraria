@@ -14,12 +14,12 @@ namespace Livraria.Persistence
         void Deletar<Dados>(Dados entidade) where Dados : class;
         void DeletarVarios<Dados>(Dados[] entidade) where Dados : class;
 
-        Task<Livro> PegarLivroPeloId(int livroId, bool includeAutor = false);
-        Task<Livro[]> PegarTodosLivros(bool includeAutor = false);
-        Task<Livro[]> PegarTodosLivrosPeloTitulo(string titulo, bool includeAutor = false);
-        Task<Livro[]> PegarTodosLivrosPeloAutor(AutorLivro autor, bool includeAutor = false);
-        Task<Livro[]> PegarTodosLivrosPelaEditora(Editora editora, bool includeAutor = false);
-        Task<Livro[]> PegarTodosLivrosPelaEdicao(int edicao, bool includeAutor = false);
+        Task<Livro> PegarLivroPeloId(int livroId);
+        Task<Livro[]> PegarTodosLivros();
+        Task<Livro[]> PegarTodosLivrosPeloTitulo(string titulo);
+        Task<Livro[]> PegarTodosLivrosPeloAutor(string autor);
+        Task<Livro[]> PegarTodosLivrosPelaEditora(string editora);
+        Task<Livro[]> PegarTodosLivrosPelaEdicao(int edicao);
 
         Task<bool> SalvarAlteracoes();
 

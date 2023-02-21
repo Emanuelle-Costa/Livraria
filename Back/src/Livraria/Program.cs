@@ -10,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 var conexao = builder.Services.AddDbContext<LivrariaContexto>(opc => opc.UseSqlServer(
     builder.Configuration.GetConnectionString("Conexao")));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(). 
+                AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddScoped<ILivroPersistence, LivroPersistence>();
 builder.Services.AddScoped<ILivroService, LivroService>();
