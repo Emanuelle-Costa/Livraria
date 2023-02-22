@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Livraria.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LivrosController : Controller
     {
         private readonly ILivroService _livroService; 

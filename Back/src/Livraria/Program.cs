@@ -10,9 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 var conexao = builder.Services.AddDbContext<LivrariaContexto>(opc => opc.UseSqlServer(
     builder.Configuration.GetConnectionString("Conexao")));
 
-builder.Services.AddControllers(). 
-                AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
-                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+builder.Services.AddControllers();
+builder.Services.AddCors();
 
 builder.Services.AddScoped<ILivroPersistence, LivroPersistence>();
 builder.Services.AddScoped<ILivroService, LivroService>();
@@ -30,6 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(x => x.AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowAnyOrigin());
+                  
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -1,0 +1,43 @@
+<h2>Livros </h2>
+
+<form action="" class="form-inline">
+  <div class="form-group mb-2">
+    <input type ="text" class="form-control mr-2" placeholder="buscar">
+    <button class ="btn btn-outline-success">Filtrar</button>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Titulo</th>
+      <th>Autor</th>
+      <th>Editora</th>
+      <th>Edicao</th>
+      <th>Preço</th>
+      <th>Estoque</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="livros && livros.length">
+    <tr *ngFor="let livro of livros">
+      <td>{{livro.id}}</td>
+      <td>{{livro.titulo}}</td>
+      <td>{{livro.autor}}</td>
+      <td>{{livro.editora}}</td>
+      <td>{{livro.edicao}}</td>
+      <td>{{livro.preco}}</td>
+      <td>{{livro.qntLivroEmEstoque}}</td>
+      <td></td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!livros.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>Nunhum Livro Encontrado!</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
