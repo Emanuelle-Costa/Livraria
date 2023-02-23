@@ -1,0 +1,163 @@
+<app-titulo></app-titulo>
+<router-outlet></router-outlet>
+
+<div class ="card rounded shadow-sm">
+  <form [formGroup]="form">
+    <!-- <p>Form value: {{ form.value | json }}</p>
+    <p>Form value: {{ form.status | json }}</p> -->
+    <div class="p-3">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Título</label>
+          <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': f.titulo.errors && f.titulo.touched}"
+          formControlName="titulo" placeholder="Insira o titulo">
+          <div *ngIf="f.titulo.errors?.required" class="invalid-feedback">
+            Titulo é um campo obrigatório!
+          </div>
+          <div *ngIf="f.titulo.errors?.minlength" class="invalid-feedback">
+            O titulo deve ter no mínimo 3 caracteres!
+          </div>
+          <div *ngIf="f.titulo.errors?.maxlength" class="invalid-feedback">
+            O titulo deve ter no máximo 100 caracteres!
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Subtitulo</label>
+          <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': f.subtitulo.errors && f.subtitulo.touched}"
+          formControlName="subtitulo" placeholder="Insira o Subtitulo (Opcional)">
+          <div *ngIf="f.subtitulo.errors?.minlength" class="invalid-feedback">
+            O subtitulo deve ter no mínimo 3 caracteres!
+          </div>
+          <div *ngIf="f.subtitulo.errors?.maxlength" class="invalid-feedback">
+            O subtitulo deve ter no máximo 100 caracteres!
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Quantidade de Páginas</label>
+          <input type="number" class="form-control"
+          [ngClass]="{'is-invalid': f.qntPaginas.errors && f.qntPaginas.touched}"
+          formControlName="qntPaginas" placeholder="Insira a quantidade de páginas">
+          <div *ngIf="f.qntPaginas.errors?.required" class="invalid-feedback">
+            Quantidade de páginas é um campo obrigatório!
+          </div>
+          <div *ngIf="f.qntPaginas.errors?.pattern" class="invalid-feedback">
+            A quantidade de páginas deve ser um número!
+          </div>
+          <div *ngIf="f.qntPaginas.errors?.min" class="invalid-feedback">
+            A quantidade de páginas deve ser maior que 10
+          </div>
+          <div *ngIf="f.qntPaginas.errors?.max" class="invalid-feedback">
+            A quantidade de páginas deve ser no máximo 10000!
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Autor</label>
+          <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': f.autor.errors && f.autor.touched}"
+          formControlName="autor" placeholder="Insira o nome do Autor ou Autores">
+          <div *ngIf="f.autor.errors?.required" class="invalid-feedback">
+            Autor é um campo obrigatório!
+          </div>
+          <div *ngIf="f.autor.errors?.minlength" class="invalid-feedback">
+            Deve ter no mínimo 3 caracteres!
+          </div>
+          <div *ngIf="f.autor.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 50 caracteres!
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label>Resumo</label>
+          <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': f.resumo.errors && f.resumo.touched}"
+          formControlName="resumo" placeholder="Insira o resumo (Opcional)">
+          <div *ngIf="f.resumo.errors?.minlength" class="invalid-feedback">
+            O resumo deve ter no mínimo 3 caracteres!
+          </div>
+          <div *ngIf="f.resumo.errors?.maxlength" class="invalid-feedback">
+            O resumo deve ter no máximo 500 caracteres!
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label>Editora</label>
+          <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': f.editora.errors && f.editora.touched}"
+          formControlName="editora" placeholder="Insira a Editora">
+          <div *ngIf="f.editora.errors?.required" class="invalid-feedback">
+            Editora é um campo obrigatório!
+          </div>
+          <div *ngIf="f.editora.errors?.minlength" class="invalid-feedback">
+            Deve ter no mínimo 3 caracteres!
+          </div>
+          <div *ngIf="f.editora.errors?.maxlength" class="invalid-feedback">
+            Deve ter no máximo 150 caracteres!
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Edição</label>
+          <input type="number" class="form-control"
+          [ngClass]="{'is-invalid': f.edicao.errors && f.edicao.touched}"
+          formControlName="edicao" placeholder="Insira a Edição (Opcional)">
+          <div *ngIf="f.edicao.errors?.min" class="invalid-feedback">
+            Edição deve ser maior ou igual a 1!
+          </div>
+          <div *ngIf="f.edicao.errors?.max" class="invalid-feedback">
+            Edição deve ser menor que 20!
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Data da Publicação</label>
+          <input type="datetime" class="form-control" [ngClass]="cssValidar(f.dataPublicacao)"
+              value="{{livro.dataPublicacao | FormatacaoData}}" bsDatepicker [bsConfig]="bsConfig" formControlName="dataPublicacao"
+              placeholder="Insira a data" [(ngModel)]="livro.dataPublicacao">
+              <div *ngIf="f.dataPublicacao.errors?.required && f.dataPublicacao.touched" class="invalid-feedback">
+                A Data de Publicação é um campo obrigatório.
+              </div>
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Preço de Venda</label>
+          <input type="number" class="form-control"
+          [ngClass]="{'is-invalid': f.preco.errors && f.preco.touched}"
+          formControlName="preco" placeholder="Insira o preço de venda">
+          <div *ngIf="f.preco.errors?.required" class="invalid-feedback">
+            O preco é um campo obrigatório!
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Quantidade em Estoque</label>
+          <input type="number" class="form-control"
+          [ngClass]="{'is-invalid': f.qntLivroEmEstoque.errors && f.qntLivroEmEstoque.touched}"
+          formControlName="qntLivroEmEstoque" placeholder="Insira a quantidade livros">
+          <div *ngIf="f.qntLivroEmEstoque.errors?.required" class="invalid-feedback">
+            A quantidade de livros é um campo obrigatório!
+          </div>
+          <div *ngIf="f.qntLivroEmEstoque.errors?.min" class="invalid-feedback">
+            A quantidade de livros deve ser maior ou igual a 1!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex">
+        <button class="btn btn-outline-secondary mr-auto border" (click)="resetForm()">
+          Cancelar Alteração
+        </button>
+        <button class="btn btn-success" [disabled]="!form.valid" (click)="salvarAlteracao()">
+          <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
+          Salvar Livro
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+

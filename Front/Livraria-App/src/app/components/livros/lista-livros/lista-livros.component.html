@@ -1,0 +1,74 @@
+<app-titulo></app-titulo>
+
+<div class="card  shadow-sm p-3">
+  <div class="d-flex">
+    <div class="flex-fill pr-3">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Filtro: </div>
+        </div>
+        <input type="text" class="form-control"placeholder="Titulo / Autor / Editora / Edição"
+        [(ngModel)]="filtroLista">
+      </div>
+    </div>
+    <div>
+      <a class = "d-flex btn btn-outline-success" routerLink="/livros/detalhe">
+        <i class="fa fa-plus-circle my-1"></i>
+        <b class="ml-1 d-none d-sm-block">Adicionar</b>
+      </a>
+    </div>
+  </div>
+
+
+  <table class="table table-striped">
+    <thead id="livro">
+      <tr>
+        <th class="d-none d-md-table-cell">ID</th>
+        <th>Titulo</th>
+        <th>Autor(es)</th>
+        <th>Editora</th>
+        <th class="d-none d-md-table-cell">Data de Publicação</th>
+        <th class="d-none d-md-table-cell">Edição</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="livros && livros.length">
+      <tr *ngFor="let livro of livrosFiltrados" >
+        <td class="d-none d-md-table-cell">{{livro.id}}</td>
+        <td>{{livro.titulo}}</td>
+        <td>{{livro.autor}}</td>
+        <td>{{livro.editora}}</td>
+        <td class="d-none d-md-table-cell">{{livro.dataPublicacao | FormatacaoData}}</td>
+        <td class="d-none d-md-table-cell">{{livro.edicao}}</td>
+        <td>{{livro.preco}}</td>
+        <td>{{livro.qntLivroEmEstoque}}</td>
+        <td>
+          <button type="button" class="btn-success btn-sm mr-2" tooltip="Editar" (click)="editarLivro(livro.id)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button type="button" class="btn-danger btn-sm" tooltip="Deletar" (click)="openModal(template)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!livros.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Nunhum Livro Encontrado!</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja Deletar esse Livro?</p>
+    <button type="button" class="btn btn-success mr-2" (click)="confirmar()">Sim</button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Não</button>
+  </div>
+</ng-template>
+<router-outlet></router-outlet>
+
