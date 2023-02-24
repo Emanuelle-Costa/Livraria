@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { ModalModule } from 'ngx-bootstrap/modal'
 import { ToastrModule } from 'ngx-toastr'
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -18,6 +20,8 @@ import { FormatacaoDataPipe } from './helpers/FormatacaoData.pipe';
 import { DetalhesComponent } from './components/livros/detalhes/detalhes.component';
 import { ListaLivrosComponent } from './components/livros/lista-livros/lista-livros.component';
 import { TituloComponent } from './components/titulo/titulo.component';
+
+defineLocale('pt-br', ptBrLocale)
 
 @NgModule({
   declarations: [

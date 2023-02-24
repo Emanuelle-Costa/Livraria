@@ -144,7 +144,7 @@ namespace Livraria.Controllers
             try
             {
                 return await _livroService.DeletarLivro(id) 
-                    ? Ok(new { mensagem ="Deletado!" }) 
+                    ? Ok(new { mensagem ="Deletado" }) 
                     : BadRequest("Livro não Deletado");
             }
             catch (Exception erro)

@@ -11,27 +11,27 @@ export class LivroService {
 
   constructor(private http: HttpClient) { }
 
-  public getLivroPorId(id: number): Observable<Livro>{
+  public pegarLivroPorId(id: number): Observable<Livro>{
     return this.http.get<Livro>(`${this.baseURL}/${id}`);
   }
 
-  public getLivros(): Observable<Livro[]>{
+  public pegarLivros(): Observable<Livro[]>{
     return this.http.get<Livro[]>(this.baseURL);
   }
 
-  public getLivrosPorTitulo(titulo: string): Observable<Livro[]>{
+  public pegarLivrosPorTitulo(titulo: string): Observable<Livro[]>{
     return this.http.get<Livro[]>(`${this.baseURL}/${titulo}/titulo`);
   }
 
-  public getLivrosPorAutor(autor: string): Observable<Livro[]>{
+  public pegarLivrosPorAutor(autor: string): Observable<Livro[]>{
     return this.http.get<Livro[]>(`${this.baseURL}/${autor}/autor`);
   }
 
-  public getLivrosPorEditora(editora: string): Observable<Livro[]>{
+  public pegarLivrosPorEditora(editora: string): Observable<Livro[]>{
     return this.http.get<Livro[]>(`${this.baseURL}/${editora}/editora`);
   }
 
-  public getLivrosPorEdicao(edicao: number): Observable<Livro[]>{
+  public pegarLivrosPorEdicao(edicao: number): Observable<Livro[]>{
     return this.http.get<Livro[]>(`${this.baseURL}/${edicao}/edicao`);
   }
 
@@ -43,7 +43,7 @@ export class LivroService {
     return this.http.put<Livro>(`${this.baseURL}/${livro.id}`, livro);
   }
 
-  public excluir(id: number): Observable<any>{
+  public deletar(id: number): Observable<any>{
     return this.http.delete(`${this.baseURL}/${id}`);
   }
 

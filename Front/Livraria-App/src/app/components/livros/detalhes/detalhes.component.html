@@ -3,14 +3,12 @@
 
 <div class ="card rounded shadow-sm">
   <form [formGroup]="form">
-    <!-- <p>Form value: {{ form.value | json }}</p>
-    <p>Form value: {{ form.status | json }}</p> -->
     <div class="p-3">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Título</label>
           <input type="text" class="form-control"
-          [ngClass]="{'is-invalid': f.titulo.errors && f.titulo.touched}"
+          [ngClass]="cssValidar(f.titulo)"
           formControlName="titulo" placeholder="Insira o titulo">
           <div *ngIf="f.titulo.errors?.required" class="invalid-feedback">
             Titulo é um campo obrigatório!
@@ -25,7 +23,7 @@
         <div class="form-group col-md-6">
           <label>Subtitulo</label>
           <input type="text" class="form-control"
-          [ngClass]="{'is-invalid': f.subtitulo.errors && f.subtitulo.touched}"
+          [ngClass]="cssValidar(f.subtitulo)"
           formControlName="subtitulo" placeholder="Insira o Subtitulo (Opcional)">
           <div *ngIf="f.subtitulo.errors?.minlength" class="invalid-feedback">
             O subtitulo deve ter no mínimo 3 caracteres!
@@ -39,7 +37,7 @@
         <div class="form-group col-md-6">
           <label>Quantidade de Páginas</label>
           <input type="number" class="form-control"
-          [ngClass]="{'is-invalid': f.qntPaginas.errors && f.qntPaginas.touched}"
+          [ngClass]="cssValidar(f.qntPaginas)"
           formControlName="qntPaginas" placeholder="Insira a quantidade de páginas">
           <div *ngIf="f.qntPaginas.errors?.required" class="invalid-feedback">
             Quantidade de páginas é um campo obrigatório!
@@ -57,7 +55,7 @@
         <div class="form-group col-md-6">
           <label>Autor</label>
           <input type="text" class="form-control"
-          [ngClass]="{'is-invalid': f.autor.errors && f.autor.touched}"
+          [ngClass]="cssValidar(f.autor)"
           formControlName="autor" placeholder="Insira o nome do Autor ou Autores">
           <div *ngIf="f.autor.errors?.required" class="invalid-feedback">
             Autor é um campo obrigatório!
@@ -74,7 +72,7 @@
         <div class="form-group col-md-12">
           <label>Resumo</label>
           <input type="text" class="form-control"
-          [ngClass]="{'is-invalid': f.resumo.errors && f.resumo.touched}"
+          [ngClass]="cssValidar(f.resumo)"
           formControlName="resumo" placeholder="Insira o resumo (Opcional)">
           <div *ngIf="f.resumo.errors?.minlength" class="invalid-feedback">
             O resumo deve ter no mínimo 3 caracteres!
@@ -88,7 +86,7 @@
         <div class="form-group col-md-4">
           <label>Editora</label>
           <input type="text" class="form-control"
-          [ngClass]="{'is-invalid': f.editora.errors && f.editora.touched}"
+          [ngClass]="cssValidar(f.editora)"
           formControlName="editora" placeholder="Insira a Editora">
           <div *ngIf="f.editora.errors?.required" class="invalid-feedback">
             Editora é um campo obrigatório!
@@ -103,7 +101,7 @@
         <div class="form-group col-md-4">
           <label>Edição</label>
           <input type="number" class="form-control"
-          [ngClass]="{'is-invalid': f.edicao.errors && f.edicao.touched}"
+          [ngClass]="cssValidar(f.edicao)"
           formControlName="edicao" placeholder="Insira a Edição (Opcional)">
           <div *ngIf="f.edicao.errors?.min" class="invalid-feedback">
             Edição deve ser maior ou igual a 1!
@@ -127,7 +125,7 @@
         <div class="form-group col-md-6">
           <label>Preço de Venda</label>
           <input type="number" class="form-control"
-          [ngClass]="{'is-invalid': f.preco.errors && f.preco.touched}"
+          [ngClass]="cssValidar(f.preco)"
           formControlName="preco" placeholder="Insira o preço de venda">
           <div *ngIf="f.preco.errors?.required" class="invalid-feedback">
             O preco é um campo obrigatório!
@@ -136,7 +134,7 @@
         <div class="form-group col-md-6">
           <label>Quantidade em Estoque</label>
           <input type="number" class="form-control"
-          [ngClass]="{'is-invalid': f.qntLivroEmEstoque.errors && f.qntLivroEmEstoque.touched}"
+          [ngClass]="cssValidar(f.qntLivroEmEstoque)"
           formControlName="qntLivroEmEstoque" placeholder="Insira a quantidade livros">
           <div *ngIf="f.qntLivroEmEstoque.errors?.required" class="invalid-feedback">
             A quantidade de livros é um campo obrigatório!

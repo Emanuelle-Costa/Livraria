@@ -24,6 +24,7 @@ export class ListaLivrosComponent {
     livroTitulo = '';
     public livros: Livro[] = [];
     public livrosFiltrados: Livro[] = [];
+    public livroId = 0;
 
     private _filtroLista: string = '';
 
@@ -46,42 +47,58 @@ export class ListaLivrosComponent {
 
       public ngOnInit(): void {
         this.spinner.show();
-        this.getLivros();
+        this.pegarLivros();
 
       }
 
-      public getLivros(): void{
-        this.livroService.getLivros().subscribe({
-          next: (livros: Livro[]) => {
-            this.livros = livros;
+      public pegarLivros(): void{
+        this.livroService.pegarLivros().subscribe(
+          (_livros: Livro[]) => {
+            this.livros = _livros;
             this.livrosFiltrados = this.livros;
           },
-          error: (error: any) => {
+          (error: any) => {
             this.spinner.hide();
             this.toastr.error('Erro ao Carregar os Livros', 'Error!');
           },
-          complete: () => this.spinner.hide()
-        });
+          () => this.spinner.hide()
+          );
+        }
+
+        openModal(template: TemplateRef<any>, livroId: number): void{
+          this.livroId = livroId;
+          this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+        }
+
+        confirmar(): void {
+          this.modalRef.hide();
+          this.spinner.show();
+
+          this.livroService.deletar(this.livroId).subscribe(
+            (resultado: any) => {
+              console.log(resultado);
+              this.toastr.success('O Livro foi deletado com sucesso!', 'Deletado!');
+              this.spinner.hide();
+              this.pegarLivros();
+          },
+          (error: any) => {
+            console.error(error);
+            this.toastr.error('Erro ao tentar deletar o livro!', 'Erro ao Deletar!');
+            this.spinner.hide();
+          },
+          () => this.spinner.hide(),
+          );
+
+        }
+
+        cancelar(): void {
+          this.modalRef.hide();
+        }
+
+        editarLivro(id: number): void{
+          this.router.navigate([`livros/detalhe/${id}`]);
+        }
+
+
 
       }
-
-      openModal(template: TemplateRef<any>): void{
-        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-      }
-
-      confirmar(): void {
-        this.modalRef.hide();
-        this.toastr.success("Livro deletado com sucesso!","Deletado", );
-      }
-
-      cancelar(): void {
-        this.modalRef.hide();
-      }
-
-      editarLivro(id: number): void{
-        this.router.navigate([`livros/detalhe/${id}`]);
-      }
-
-
-
-    }

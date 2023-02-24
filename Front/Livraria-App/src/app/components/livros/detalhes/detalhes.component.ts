@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Livro } from 'src/app/models/Livro';
@@ -18,11 +20,14 @@ export class DetalhesComponent {
     private router: ActivatedRoute,
     private livroService: LivroService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
-    ) { }
+    private spinner: NgxSpinnerService,
+    private localeService: BsLocaleService)
+    {
+      this.localeService.use('pt-br');
+    }
 
     ngOnInit(): void {
-      this.pegarLivro();
+      this.carregarLivro();
       this.validacao();
 
     }
@@ -39,12 +44,12 @@ export class DetalhesComponent {
     return {
       adaptivePosition: true,
       dateInputFormat: 'DD/MM/YYYY',
-      containerClass: 'theme-default',
+      containerClass: 'theme-orange',
       showWeekNumbers: false,
     };
   }
 
-  public pegarLivro(): void {
+  public carregarLivro(): void {
     const livroIdParam = this.router.snapshot.paramMap.get('id');
 
     if (livroIdParam !== null){
@@ -52,7 +57,7 @@ export class DetalhesComponent {
 
       this.estadoSalvar = 'atualizar';
 
-      this.livroService.getLivroPorId(+livroIdParam).subscribe(
+      this.livroService.pegarLivroPorId(+livroIdParam).subscribe(
         (livro: Livro) => {
           this.livro = {...livro};
           this.form.patchValue(this.livro);
@@ -124,3 +129,5 @@ export class DetalhesComponent {
       }
 
 }
+
+
