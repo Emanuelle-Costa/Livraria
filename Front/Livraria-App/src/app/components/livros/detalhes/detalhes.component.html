@@ -3,6 +3,8 @@
 
 <div class ="card rounded shadow-sm">
   <form [formGroup]="form">
+    <p>Form value: {{form.value | json}}</p>
+    <p>Form value: {{form.status | json}}</p>
     <div class="p-3">
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -53,18 +55,12 @@
           </div>
         </div>
         <div class="form-group col-md-6">
-          <label>Autor</label>
+          <label>Imagem URL</label>
           <input type="text" class="form-control"
-          [ngClass]="cssValidar(f.autor)"
-          formControlName="autor" placeholder="Insira o nome do Autor ou Autores">
-          <div *ngIf="f.autor.errors?.required" class="invalid-feedback">
-            Autor é um campo obrigatório!
-          </div>
-          <div *ngIf="f.autor.errors?.minlength" class="invalid-feedback">
-            Deve ter no mínimo 3 caracteres!
-          </div>
-          <div *ngIf="f.autor.errors?.maxlength" class="invalid-feedback">
-            Deve ter no máximo 50 caracteres!
+          [ngClass]="cssValidar(f.imagemURL)"
+          formControlName="imagemURL" placeholder="Insira a URL da imagem">
+          <div *ngIf="f.imagemURL.errors?.required" class="invalid-feedback">
+            imagemURL é um campo obrigatório!
           </div>
         </div>
       </div>

@@ -1,176 +1,160 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Livraria.Application;
-using Livraria.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Livraria.Models;
+using Livraria.Models.Contratos;
+
 
 namespace Livraria.Controllers
 {
     [Route("api/[controller]")]
-    public class LivrosController : Controller
+    [ApiController]
+    public class LivrosController : ControllerBase
     {
-        private readonly ILivroService _livroService; 
-        public LivrosController(ILivroService livroService)
+        
+        private readonly ILivroModel _livroModel;
+
+        public LivrosController(ILivroModel livroModel)
         {
-            _livroService = livroService;
+            _livroModel = livroModel;
+            
         }
 
+        
         [HttpGet]
-        public async Task<IActionResult> PegarTodosLivros()
+        public async Task<ActionResult> PegarTodosLivros()
         {
             try
             {
-                var livros = await _livroService.PegarTodosLivros();
-                if (livros == null) return NotFound("Nenhum Livro Encontrado.");
+                var livros = await _livroModel.PegarTodosLivros();
+                if(livros == null) return NotFound("Nenhum livro encontrado!");
 
                 return Ok(livros);
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentat recuperar os livros. Erro {ex.Message}");
+                $"Erro ao tentar recuperar livros. Erro: {erro.Message}");
             }
-        } 
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> PegarLivroPeloId(int id)
         {
-            try
+             try
             {
-                var livro = await _livroService.PegarLivroPeloId(id);
-                if (livro == null) return NotFound("Nenhum Livro Encontrado pelo Id.");
+                var livro = await _livroModel.PegarLivroPeloId(id);
+                if(livro == null) return NotFound("Nenhum livro foi encontrado pelo Id");
 
                 return Ok(livro);
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentat recuperar os livros. Erro {ex.Message}");
+                $"Erro ao tentar recuperar livro. Erro: {erro.Message}");
             }
-        } 
+        }
 
         [HttpGet("{titulo}/titulo")]
         public async Task<IActionResult> PegarTodosLivrosPeloTitulo(string titulo)
         {
-            try
+             try
             {
-                var livros = await _livroService.PegarTodosLivrosPeloTitulo(titulo);
-                if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Titulo.");
+                var livro = await _livroModel.PegarTodosLivrosPeloTitulo(titulo);
+                if(livro == null) return NotFound("Nenhum Livro foi encontrado pelo titulo");
 
-                return Ok(livros);
+                return Ok(livro);
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentat recuperar os livros. Erro {ex.Message}");
+                $"Erro ao tentar recuperar os livros. Erro: {erro.Message}");
             }
-        } 
-
-        [HttpGet("{autor}/autor")]
-        public async Task<IActionResult> PegarTodosLivrosPeloAutor(string autor)
-        {
-            try
-            {
-                var livros = await _livroService.PegarTodosLivrosPeloAutor(autor);
-                if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Autor.");
-
-                return Ok(livros);
-            }
-            catch (Exception ex)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentat recuperar os livros. Erro {ex.Message}");
-            }
-        } 
+        }
 
         [HttpGet("{editora}/editora")]
         public async Task<IActionResult> PegarTodosLivrosPelaEditora(string editora)
         {
-            try
+             try
             {
-                var livros = await _livroService.PegarTodosLivrosPelaEditora(editora);
-                if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Editora.");
+                var livro = await _livroModel.PegarTodosLivrosPelaEditora(editora);
+                if(livro == null) return NotFound("Nenhum Livro foi encontrado pelo editora");
 
-                return Ok(livros);
+                return Ok(livro);
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentat recuperar os livros. Erro {ex.Message}");
+                $"Erro ao tentar recuperar os livros. Erro: {erro.Message}");
             }
-        } 
+        }
 
         [HttpGet("{edicao}/edicao")]
         public async Task<IActionResult> PegarTodosLivrosPelaEdicao(int edicao)
         {
-            try
+             try
             {
-                var livros = await _livroService.PegarTodosLivrosPelaEdicao(edicao);
-                if (livros == null) return NotFound("Nenhum Livro Encontrado pelo Edicação.");
-
-                return Ok(livros);
-            }
-            catch (Exception ex)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentat recuperar os livros. Erro {ex.Message}");
-            }
-        } 
-
-        [HttpPost]
-        public async Task<IActionResult> AdicionarLivro(Livro model)
-        {
-            try
-            {
-                var livro = await _livroService.AdicionarLivro(model);
-                if (livro == null) return BadRequest("Erro ao tentar adicionar um Livro.");
+                var livro = await _livroModel.PegarTodosLivrosPelaEdicao(edicao);
+                if(livro == null) return NotFound("Nenhum livro foi encontrado pela edição");
 
                 return Ok(livro);
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar Adicionar livro. Erro {ex.Message}");
+                $"Erro ao tentar recuperar os livros. Erro: {erro.Message}");
             }
-        } 
+        }
+        
 
+        [HttpPost]
+        public async Task<IActionResult>AdicionarLivro(Livro model)
+        {
+           try
+            {
+                var livro = await _livroModel.AdicionarLivro(model);
+                if(livro == null) return BadRequest("Erro ao tentar adicionar livro");
+
+                return Ok(livro);
+            }
+            catch (Exception erro)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar adicionar livro. Erro: {erro.Message}");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult>AtualizarLivro(int id, Livro model)
+        {
+           try
+            {
+                var livro = await _livroModel.AtualizarLivro(id, model);
+                if(livro == null) return BadRequest("Erro ao tentar atualizar livro");
+
+                return Ok(livro);
+            }
+            catch (Exception erro)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar atualizar livro. Erro: {erro.Message}");
+            }
+        }
+
+
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarLivro(int id)
         {
             try
             {
-                return await _livroService.DeletarLivro(id) 
-                    ? Ok(new { mensagem ="Deletado" }) 
+                return await _livroModel.DeletarLivro(id) 
+                    ? Ok(new { mensagem ="Deletado!" }) 
                     : BadRequest("Livro não Deletado");
             }
             catch (Exception erro)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar Deletar Livro. Erro: {erro.Message}");
+                $"Erro ao tentar deletar livro. Erro: {erro.Message}");
             }
-        } 
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarLivro(int id, Livro model)
-        {
-            try
-            {
-                var livro = await _livroService.AtualizarLivro(id, model);
-                if (livro == null) return BadRequest("Erro ao tentar Atualizar Livro.");
-
-                return Ok(livro);
-            }
-            catch (Exception ex)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar Atualizar livro. Erro {ex.Message}");
-            }
-        } 
-
-        
+        }
     }
 }

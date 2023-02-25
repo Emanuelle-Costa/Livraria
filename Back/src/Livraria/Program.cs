@@ -1,20 +1,27 @@
-using Livraria.Application;
-using Livraria.Persistence;
-using Livraria.Persistence.Contexto;
 using Microsoft.EntityFrameworkCore;
+using Livraria.Data;
+using Livraria.Models;
+using Livraria.Models.Contratos;
+using Livraria.Data.Contratos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-var conexao = builder.Services.AddDbContext<LivrariaContexto>(opc => opc.UseSqlServer(
+var conexao = builder.Services.AddDbContext<ContextoBanco>(option => option.UseSqlServer(
     builder.Configuration.GetConnectionString("Conexao")));
 
-builder.Services.AddControllers();
-builder.Services.AddCors();
 
-builder.Services.AddScoped<ILivroPersistence, LivroPersistence>();
-builder.Services.AddScoped<ILivroService, LivroService>();
+builder.Services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
+builder.Services.AddScoped<ILivroModel, LivroModel>();
+builder.Services.AddScoped<IGeralPersistencia, GeralPersistencia>();
+builder.Services.AddScoped<ILivroPersistencia, LivroPersistencia>();
+
+
+builder.Services.AddCors();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,7 +39,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors(x => x.AllowAnyHeader()
                   .AllowAnyMethod()
                   .AllowAnyOrigin());
-                  
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -1,7 +1,8 @@
-﻿namespace Livraria.Domain
+namespace Livraria.Models
 {
     public class Livro
     {
+        public string ImagemURL { get; set; } 
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string? Subtitulo { get; set; }
@@ -10,9 +11,9 @@
         public DateTime DataPublicacao { get; set; }
         public int? Edicao { get; set; }
         public string Editora { get; set; }
-        public string Autor{ get; set; }
         public double Preco { get; set; }
         public int QntLivroEmEstoque { get; set; }
+        public IEnumerable<Autor>? Autores { get; set; }
 
     }
 }

@@ -7,7 +7,7 @@ import { Livro } from '../models/Livro';
   providedIn: 'root'
 })
 export class LivroService {
-  baseURL = 'https://localhost:7163/api/Livros';
+  baseURL = 'https://localhost:7101/api/Livros';
 
   constructor(private http: HttpClient) { }
 

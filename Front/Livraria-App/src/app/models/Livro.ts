@@ -1,4 +1,5 @@
 export interface Livro {
+  imagemURL: string;
   id: number;
   titulo: string;
   subtitulo?: string;

@@ -87,7 +87,7 @@ export class DetalhesComponent {
       titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       subtitulo: ['', [Validators.minLength(3), Validators.maxLength(100)]],
       qntPaginas : ['', [Validators.required, Validators.min(10), Validators.max(10000)]],
-      autor: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      imagemURL: ['', [Validators.required]],
       resumo: ['', [Validators.minLength(3), Validators.maxLength(500)]],
       editora: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]],
       dataPublicacao: ['', Validators.required],
