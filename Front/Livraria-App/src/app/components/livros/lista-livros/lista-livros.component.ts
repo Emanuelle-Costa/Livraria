@@ -25,8 +25,15 @@ export class ListaLivrosComponent {
     public livros: Livro[] = [];
     public livrosFiltrados: Livro[] = [];
     public livroId = 0;
+    public exibirImg: boolean = true;
+    public larguraImg: number = 80;
+    public margemImg: number = 2;
 
     private _filtroLista: string = '';
+
+    public alterarImg(): void{
+      this.exibirImg = !this.exibirImg;
+    }
 
     public get filtroLista(){
       return this._filtroLista
@@ -37,12 +44,16 @@ export class ListaLivrosComponent {
       this.livrosFiltrados = this.filtroLista ? this.filtrarLivros(this.filtroLista) : this.livros;
     }
 
-    public filtrarLivros(filtrarPorTitulo : string): Livro[] {
-      filtrarPorTitulo = filtrarPorTitulo.toLocaleLowerCase();
+    public filtrarLivros(filtrarPor : string): Livro[] {
+      filtrarPor = filtrarPor.toLocaleLowerCase();
       return this.livros.filter(
-        (livro : any) => livro.titulo.toLocaleLowerCase().indexOf(filtrarPorTitulo) !== -1
+        (livro) =>
+        livro.titulo.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+        livro.autor.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+        livro.editora.toLocaleLowerCase().indexOf(filtrarPor) !== -1
         )
-      }
+    }
+
 
 
       public ngOnInit(): void {

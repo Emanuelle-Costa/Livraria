@@ -7,7 +7,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Filtro: </div>
         </div>
-        <input type="text" class="form-control"placeholder="Titulo / Autor / Editora / Edição"
+        <input type="text" class="form-control"placeholder="Titulo / Autor / Editora"
         [(ngModel)]="filtroLista">
       </div>
     </div>
@@ -23,7 +23,14 @@
   <table class="table table-striped">
     <thead id="livro">
       <tr>
-        <th class="d-none d-md-table-cell">ID</th>
+        <th>
+          <button class="btn btn-outline-light btn-sm"
+          (click)="alterarImg()">
+          <i class="{{!exibirImg ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
+          {{!exibirImg ? 'Exibir' : 'Ocultar'}}
+        </button>
+        </th>
+        <th>ID</th>
         <th>Titulo</th>
         <th>Autor(es)</th>
         <th>Editora</th>
@@ -34,9 +41,16 @@
         <th>Opções</th>
       </tr>
     </thead>
-    <tbody *ngIf="livros && livros.length">
-      <tr *ngFor="let livro of livrosFiltrados" >
-        <td class="d-none d-md-table-cell">{{livro.id}}</td>
+    <tbody *ngIf="livros && livros.length" >
+      <tr *ngFor="let livro of livrosFiltrados">
+        <td>
+          <img [collapse]="!exibirImg"
+          [isAnimated]="true"
+          class = "fotos" src="/assets/{{ livro.imagemURL }}" alt="" tooltip= "{{ livro.resumo }}"
+          [style.width.px]="larguraImg"
+          [style.margin.px]="margemImg"
+          >
+        <td>{{livro.id}}</td>
         <td>{{livro.titulo}}</td>
         <td>{{livro.autor}}</td>
         <td>{{livro.editora}}</td>

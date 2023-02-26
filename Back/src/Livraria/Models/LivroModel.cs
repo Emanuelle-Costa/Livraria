@@ -105,6 +105,22 @@ namespace Livraria.Models
            }
         }
 
+        public async Task<Livro[]> PegarTodosLivrosPeloAutor(string autor)
+        {
+            try
+           {
+                var livros = await _livroPersistencia.PegarTodosLivrosPeloAutor(autor);
+                if(PegarTodosLivros == null) return null;
+
+                return livros;
+           }
+           catch (Exception erro)
+           {
+            
+                throw new Exception(erro.Message);
+           }
+        }
+
         public async Task<Livro[]> PegarTodosLivrosPelaEditora(string editora)
         {
             try

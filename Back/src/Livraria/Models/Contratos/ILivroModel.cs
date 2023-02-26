@@ -9,6 +9,7 @@ namespace Livraria.Models.Contratos
 
         Task<Livro[]> PegarTodosLivros();
         Task<Livro[]> PegarTodosLivrosPeloTitulo(string titulo); 
+        Task<Livro[]> PegarTodosLivrosPeloAutor(string autor); 
         Task<Livro[]> PegarTodosLivrosPelaEditora(string editora);
         Task<Livro[]> PegarTodosLivrosPelaEdicao(int edicao);
         Task<Livro> PegarLivroPeloId(int LivroId);

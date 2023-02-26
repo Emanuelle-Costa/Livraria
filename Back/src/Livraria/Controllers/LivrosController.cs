@@ -70,6 +70,23 @@ namespace Livraria.Controllers
             }
         }
 
+        [HttpGet("{autor}/autor")]
+        public async Task<IActionResult> PegarTodosLivrosPeloAutor(string autor)
+        {
+             try
+            {
+                var livro = await _livroModel.PegarTodosLivrosPeloAutor(autor);
+                if(livro == null) return NotFound("Nenhum Livro foi encontrado pelo autor");
+
+                return Ok(livro);
+            }
+            catch (Exception erro)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao tentar recuperar os livros. Erro: {erro.Message}");
+            }
+        }
+
         [HttpGet("{editora}/editora")]
         public async Task<IActionResult> PegarTodosLivrosPelaEditora(string editora)
         {

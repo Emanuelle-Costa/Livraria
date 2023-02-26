@@ -32,6 +32,16 @@ namespace Livraria.Data
             return await consulta.ToArrayAsync();
         }
 
+        public async Task<Livro[]> PegarTodosLivrosPeloAutor(string autor)
+        {
+            IQueryable<Livro> consulta = _context.Livros;
+
+            consulta = consulta.AsNoTracking().OrderBy(l => l.Titulo)
+                               .Where(l => l.Autor.ToLower().Contains(autor.ToLower()));
+
+            return await consulta.ToArrayAsync();
+        }
+
         public async Task<Livro[]> PegarTodosLivrosPelaEditora(string editora)
         {
             IQueryable<Livro> consulta = _context.Livros;

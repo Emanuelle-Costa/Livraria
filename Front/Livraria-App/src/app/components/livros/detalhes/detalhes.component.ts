@@ -87,13 +87,14 @@ export class DetalhesComponent {
       titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       subtitulo: ['', [Validators.minLength(3), Validators.maxLength(100)]],
       qntPaginas : ['', [Validators.required, Validators.min(10), Validators.max(10000)]],
-      imagemURL: ['', [Validators.required]],
+      autor: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(500)]],
       resumo: ['', [Validators.minLength(3), Validators.maxLength(500)]],
       editora: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]],
       dataPublicacao: ['', Validators.required],
       edicao: ['', [Validators.min(1), Validators.max(20)]],
       preco : ['', [Validators.required,]],
-      qntLivroEmEstoque: ['', [Validators.required, Validators.min(1)]]
+      qntLivroEmEstoque: ['', [Validators.required, Validators.min(1)]],
+      imagemURL:['', [Validators.required]]
     });
   }
 

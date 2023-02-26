@@ -13,7 +13,7 @@ namespace Livraria.Models
         public string Editora { get; set; }
         public double Preco { get; set; }
         public int QntLivroEmEstoque { get; set; }
-        public IEnumerable<Autor>? Autores { get; set; }
+        public string Autor { get; set; }
 
     }
 }

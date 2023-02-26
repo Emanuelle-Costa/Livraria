@@ -55,21 +55,27 @@
           </div>
         </div>
         <div class="form-group col-md-6">
-          <label>Imagem URL</label>
+          <label>Autor</label>
           <input type="text" class="form-control"
-          [ngClass]="cssValidar(f.imagemURL)"
-          formControlName="imagemURL" placeholder="Insira a URL da imagem">
-          <div *ngIf="f.imagemURL.errors?.required" class="invalid-feedback">
-            imagemURL é um campo obrigatório!
+          [ngClass]="cssValidar(f.autor)"
+          formControlName="autor" placeholder="Insira o Nome do Autor">
+          <div *ngIf="f.autor.errors?.required" class="invalid-feedback">
+            Autor é um campo obrigatório!
+          </div>
+          <div *ngIf="f.autor.errors?.minlength" class="invalid-feedback">
+            O autor deve ter no mínimo 3 caracteres!
+          </div>
+          <div *ngIf="f.autor.errors?.maxlength" class="invalid-feedback">
+            O autor deve ter no máximo 50 caracteres!
           </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Resumo</label>
-          <input type="text" class="form-control"
+          <textarea id="mensagem" name="mensagem" rows="5" cols="50"class="form-control"
           [ngClass]="cssValidar(f.resumo)"
-          formControlName="resumo" placeholder="Insira o resumo (Opcional)">
+          formControlName="resumo" placeholder="Insira o resumo (Opcional)"></textarea>
           <div *ngIf="f.resumo.errors?.minlength" class="invalid-feedback">
             O resumo deve ter no mínimo 3 caracteres!
           </div>
@@ -114,11 +120,19 @@
               <div *ngIf="f.dataPublicacao.errors?.required && f.dataPublicacao.touched" class="invalid-feedback">
                 A Data de Publicação é um campo obrigatório.
               </div>
-
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
+          <label>Imagem URL</label>
+          <input type="text" class="form-control"
+          [ngClass]="cssValidar(f.imagemURL)"
+          formControlName="imagemURL" placeholder="Insira a URL da imagem">
+          <div *ngIf="f.imagemURL.errors?.required" class="invalid-feedback">
+            imagemURL é um campo obrigatório!
+          </div>
+        </div>
+        <div class="form-group col-md-4">
           <label>Preço de Venda</label>
           <input type="number" class="form-control"
           [ngClass]="cssValidar(f.preco)"
@@ -127,7 +141,7 @@
             O preco é um campo obrigatório!
           </div>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label>Quantidade em Estoque</label>
           <input type="number" class="form-control"
           [ngClass]="cssValidar(f.qntLivroEmEstoque)"

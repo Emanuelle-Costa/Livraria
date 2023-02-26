@@ -22,28 +22,6 @@ namespace Livraria.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Livraria.Models.Autor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("LivroId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NomeAutor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LivroId");
-
-                    b.ToTable("Autores");
-                });
-
             modelBuilder.Entity("Livraria.Models.Livro", b =>
                 {
                     b.Property<int>("Id")
@@ -51,6 +29,10 @@ namespace Livraria.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataPublicacao")
                         .HasColumnType("datetime2");
@@ -88,20 +70,6 @@ namespace Livraria.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Livros");
-                });
-
-            modelBuilder.Entity("Livraria.Models.Autor", b =>
-                {
-                    b.HasOne("Livraria.Models.Livro", null)
-                        .WithMany("Autores")
-                        .HasForeignKey("LivroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Livraria.Models.Livro", b =>
-                {
-                    b.Navigation("Autores");
                 });
 #pragma warning restore 612, 618
         }

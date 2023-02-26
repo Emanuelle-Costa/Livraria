@@ -15,7 +15,7 @@ export class LivroService {
     return this.http.get<Livro>(`${this.baseURL}/${id}`);
   }
 
-  public pegarLivros(): Observable<Livro[]>{
+  public pegarLivros(term?: string): Observable<Livro[]>{
     return this.http.get<Livro[]>(this.baseURL);
   }
 
