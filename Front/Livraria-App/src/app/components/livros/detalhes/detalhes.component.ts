@@ -105,7 +105,7 @@ export class DetalhesComponent {
       if(this.estadoSalvar === 'adicionar'){
         this.livro = {...this.form.value};
         this.livroService['adicionar'](this.livro).subscribe(
-          () => this.toastr.success('livro salvo com sucesso!', 'Sucesso'),
+          () => this.toastr.success('Livro salvo com sucesso!', 'Sucesso'),
           (error: any) => {
             console.error(error);
             this.spinner.hide();
@@ -116,7 +116,7 @@ export class DetalhesComponent {
         } else{
           this.livro = {id: this.livro.id, ...this.form.value};
           this.livroService['atualizar'](this.livro).subscribe(
-            () => this.toastr.success('livro salvo com sucesso!', 'Sucesso'),
+            () => this.toastr.success('Livro salvo com sucesso!', 'Sucesso'),
             (error: any) => {
               console.error(error);
               this.spinner.hide();
